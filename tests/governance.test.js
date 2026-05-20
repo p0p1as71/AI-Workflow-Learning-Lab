@@ -10,7 +10,7 @@ const {
 } = require('../src/state/stateModel');
 
 function runTests() {
-  // 1. Happy path: submitted → reviewed → validated → executed
+  // 1. Happy path: submitted → reviewed → approved → validated → executed
   let history = [];
   let result;
 
@@ -21,6 +21,7 @@ function runTests() {
   result = validateTransition({ role: 'governor', action: 'reviewed' }, history);
   assert.strictEqual(result.valid, true);
   history.push({ role: 'governor', action: 'reviewed' });
+  history.push({ role: 'governor', action: 'approved' });
 
   result = validateTransition({ role: 'validator', action: 'validated' }, history);
   assert.strictEqual(result.valid, true);
@@ -65,7 +66,7 @@ function runTests() {
   assert.strictEqual(isValidTransition('submitted', 'reviewed'), true);
   assert.strictEqual(isValidTransition('submitted', 'executed'), false);
   const transitions = getValidTransitionsFrom('reviewed');
-  assert.ok(transitions.includes('validated'));
+  assert.ok(transitions.includes('approved'));
   assert.ok(transitions.includes('rejected'));
 
   console.log('All tests passed.');

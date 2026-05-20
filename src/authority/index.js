@@ -10,7 +10,7 @@
 
 const AUTHORITY_SCOPES = {
   intaker:   { scope: 'intake',      actions: ['submitted', 'correction'] },
-  governor:  { scope: 'governance',  actions: ['reviewed', 'rejected', 'correction'] },
+  governor:  { scope: 'governance',  actions: ['reviewed', 'approved', 'rejected', 'correction'] },
   validator: { scope: 'validation',  actions: ['validated', 'rejected', 'correction'] },
   executor:  { scope: 'execution',   actions: ['executed', 'correction'] },
 };

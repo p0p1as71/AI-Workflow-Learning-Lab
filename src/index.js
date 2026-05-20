@@ -34,6 +34,7 @@ console.log("Governance Runtime Demo");
 // REQ-1001 Happy path
 appendAndShow({ event_id: nextEventId(), request_id: "REQ-1001", role: "intaker", action: "submitted" });
 appendAndShow({ event_id: nextEventId(), request_id: "REQ-1001", role: "governor", action: "reviewed" });
+appendAndShow({ event_id: nextEventId(), request_id: "REQ-1001", role: "governor", action: "approved" });
 appendAndShow({ event_id: nextEventId(), request_id: "REQ-1001", role: "validator", action: "validated" });
 appendAndShow({ event_id: nextEventId(), request_id: "REQ-1001", role: "executor", action: "executed" });
 

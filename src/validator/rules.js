@@ -12,7 +12,8 @@
 
 const VALID_TRANSITIONS = {
   submitted:  ["reviewed", "correction"],
-  reviewed:   ["validated", "rejected", "correction"],
+  reviewed:   ["approved", "rejected", "correction"],
+  approved:   ["validated"],
   validated:  ["executed", "rejected", "correction"],
   rejected:   ["correction"],
   executed:   ["correction"],
@@ -21,32 +22,35 @@ const VALID_TRANSITIONS = {
 
 const ROLE_ACTIONS = {
   intaker:   ["submitted", "correction"],
-  governor:  ["reviewed", "rejected", "correction"],
+  governor:  ["reviewed", "approved", "rejected", "correction"],
   validator: ["validated", "rejected", "correction"],
   executor:  ["executed", "correction"],
 };
 
 const ACTION_PREREQUISITES = {
   submitted: { requiresChain: [], requiresEvent: {}, requiresFields: {} },
-  reviewed:  { requiresChain: [{ action: "submitted" }], requiresEvent: { submitted: {} }, requiresFields: {} },
+  
+reviewed:  { requiresChain: [{ action: "submitted" }], requiresEvent: { submitted: {} }, requiresFields: {} },
+
+  approved:  {
+    requiresChain: [{ action: "submitted" }, { action: "reviewed" }],
+    requiresEvent: { reviewed: {} },
+    requiresFields: {}
+  },
   validated: {
     requiresChain: [
       { action: "submitted" },
-      { action: "reviewed", field: "payload.decision", expected: "approved" },
+      { action: "reviewed" },
+      { action: "approved" },
     ],
-    requiresEvent: { reviewed: { "payload.decision": "approved" } },
     requiresFields: {},
   },
   rejected:  { requiresChain: [], requiresEvent: {}, requiresFields: {} },
   executed:  {
     requiresChain: [
       { action: "submitted" },
-      { action: "reviewed", field: "payload.decision", expected: "approved" },
-      { action: "validated", field: "payload.result", expected: "valid" },
     ],
     requiresEvent: {
-      reviewed:  { "payload.decision": "approved" },
-      validated: { "payload.result": "valid" },
     },
     requiresFields: {},
   },

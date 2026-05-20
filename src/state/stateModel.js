@@ -11,6 +11,7 @@
 const STATES = {
   submitted:  { terminal: false, phase: 'intake' },
   reviewed:   { terminal: false, phase: 'governance' },
+  approved:   { terminal: false, phase: 'governance' },
   validated:  { terminal: false, phase: 'validation' },
   executed:   { terminal: true,  phase: 'execution' },
   rejected:   { terminal: true,  phase: 'governance|validation' },
@@ -19,7 +20,8 @@ const STATES = {
 
 const VALID_TRANSITIONS = {
   submitted:  ['reviewed', 'correction'],
-  reviewed:   ['validated', 'rejected', 'correction'],
+  reviewed:   ['approved', 'rejected', 'correction'],
+  approved:   ['validated'],
   validated:  ['executed', 'rejected', 'correction'],
   rejected:   ['correction'],
   executed:   ['correction'],
