@@ -1,3 +1,6 @@
+#!/bin/bash
+
+cat > docs/event-lifecycle.md <<'DOC'
 # Event Lifecycle
 
 ## Event types
@@ -70,4 +73,11 @@ No execution is legitimate without a complete prior governance chain.
 System legitimacy is verified through deterministic replay of the append-only ledger.
 
 State is derived from events, never mutated directly.
+
+DOC
+
+echo ""
+echo "===== DOC UPDATED ====="
+
+cat docs/event-lifecycle.md
 

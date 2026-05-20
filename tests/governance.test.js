@@ -21,6 +21,10 @@ function runTests() {
   result = validateTransition({ role: 'governor', action: 'reviewed' }, history);
   assert.strictEqual(result.valid, true);
   history.push({ role: 'governor', action: 'reviewed' });
+
+  result = validateTransition({ role: 'governor', action: 'approved' }, history);
+  assert.strictEqual(result.valid, true);
+
   history.push({ role: 'governor', action: 'approved' });
 
   result = validateTransition({ role: 'validator', action: 'validated' }, history);
@@ -67,6 +71,7 @@ function runTests() {
   assert.strictEqual(isValidTransition('submitted', 'executed'), false);
   const transitions = getValidTransitionsFrom('reviewed');
   assert.ok(transitions.includes('approved'));
+  assert.ok(!transitions.includes('validated'));
   assert.ok(transitions.includes('rejected'));
 
   console.log('All tests passed.');

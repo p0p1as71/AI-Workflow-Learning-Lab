@@ -28,4 +28,21 @@ fi
 echo "✔ Authority limits section present"
 
 echo "Governance validation passed"
-exit 0
+
+
+echo "Running constitutional consistency checks..."
+
+node - <<'NODE'
+const { validateConstitution } = require('./src/validator/checkConstitution');
+
+const result = validateConstitution();
+
+if (!result.valid) {
+  console.error("❌ Constitutional inconsistencies detected");
+  console.error(result.problems);
+  process.exit(1);
+}
+
+console.log("✅ Constitutional model consistent");
+NODE
+

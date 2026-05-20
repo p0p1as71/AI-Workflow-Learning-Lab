@@ -49,8 +49,15 @@ reviewed:  { requiresChain: [{ action: "submitted" }], requiresEvent: { submitte
   executed:  {
     requiresChain: [
       { action: "submitted" },
+      { action: "reviewed" },
+      { action: "approved" },
+      { action: "validated" }
     ],
     requiresEvent: {
+      submitted: {},
+      reviewed: {},
+      approved: {},
+      validated: {}
     },
     requiresFields: {},
   },

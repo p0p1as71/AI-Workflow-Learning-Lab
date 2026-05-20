@@ -1,3 +1,6 @@
+#!/bin/bash
+
+cat > src/state/stateModel.js <<'STATE'
 const { VALID_TRANSITIONS } = require('../validator/rules');
 
 const STATES = {
@@ -22,19 +25,21 @@ function getStateInfo(state) {
   return STATES[state] || null;
 }
 
-function isTerminalState(state) {
-  return STATES[state]?.terminal || false;
-}
-
-function getStatePhase(state) {
-  return STATES[state]?.phase || null;
-}
-
 module.exports = {
   STATES,
   isValidTransition,
   getValidTransitionsFrom,
   getStateInfo,
-  isTerminalState,
-  getStatePhase,
 };
+STATE
+
+echo ""
+echo "===== TEST ====="
+
+node tests/governance.test.js
+
+echo ""
+echo "===== RUNTIME ====="
+
+node src/index.js
+
