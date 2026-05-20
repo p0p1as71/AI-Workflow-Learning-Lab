@@ -61,7 +61,17 @@ reviewed:  { requiresChain: [{ action: "submitted" }], requiresEvent: { submitte
     },
     requiresFields: {},
   },
-  correction: { requiresChain: [], requiresEvent: {}, requiresFields: { reason: "string" } },
+  correction: {
+    requiresChain: [
+      { action: "submitted" }
+    ],
+    requiresEvent: {
+      submitted: {}
+    },
+    requiresFields: {
+      reason: "string"
+    }
+  },
 };
 
 function actionsForRole(role) {
