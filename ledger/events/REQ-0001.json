@@ -1,0 +1,19 @@
+{
+  "request_id": "REQ-0001",
+  "events": [
+    {
+      "event_id": "EVT-0001",
+      "request_id": "REQ-0001",
+      "actor": "external-system",
+      "role": "intaker",
+      "phase": "intake",
+      "action": "submitted",
+      "timestamp": "2026-05-20T10:00:00Z",
+      "payload": {
+        "type": "feature_request",
+        "summary": "Add healthcheck endpoint",
+        "description": "We need a GET /health endpoint returning 200 when the service is operational."
+      }
+    }
+  ]
+}
