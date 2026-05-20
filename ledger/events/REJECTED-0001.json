@@ -1,0 +1,36 @@
+{
+  "request_id": "REJECTED-0001",
+  "events": [
+    {
+      "event_id": "EVT-R001",
+      "request_id": "REJECTED-0001",
+      "actor": "external-system",
+      "role": "intaker",
+      "phase": "intake",
+      "action": "submitted",
+      "previous_state": null,
+      "authority_scope": "intake",
+      "timestamp": "2026-05-20T11:00:00Z",
+      "payload": {
+        "type": "change_request",
+        "summary": "Modify critical database schema without backup"
+      }
+    },
+    {
+      "event_id": "EVT-R002",
+      "request_id": "REJECTED-0001",
+      "actor": "governance-agent",
+      "role": "governor",
+      "phase": "governance",
+      "action": "reviewed",
+      "previous_state": "submitted",
+      "authority_scope": "governance",
+      "timestamp": "2026-05-20T11:05:00Z",
+      "payload": {
+        "decision": "rejected",
+        "rationale": "High-risk schema change without backup plan. Does not meet risk policy.",
+        "risk_level": "critical"
+      }
+    }
+  ]
+}

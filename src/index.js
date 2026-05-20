@@ -9,6 +9,7 @@
 const { appendEvent } = require("./ledger/ledger");
 const { getState, getAllRequestIds } = require("./ledger/query");
 const { replayAll } = require("./ledger/replay");
+const { printSystemStatus } = require("./runtime/status");
 
 let _seq = 0;
 function nextEventId() {
@@ -45,3 +46,4 @@ getAllRequestIds().forEach((id) => {
 console.log("\nReplay check:");
 const replay = replayAll();
 console.log(replay.valid ? "✅ Ledger intact" : "❌ Ledger corrupted");
+printSystemStatus();

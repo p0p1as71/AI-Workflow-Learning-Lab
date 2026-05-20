@@ -8,11 +8,67 @@
       "role": "intaker",
       "phase": "intake",
       "action": "submitted",
+      "previous_state": null,
+      "authority_scope": "intake",
       "timestamp": "2026-05-20T10:00:00Z",
       "payload": {
         "type": "feature_request",
         "summary": "Add healthcheck endpoint",
-        "description": "We need a GET /health endpoint returning 200 when the service is operational."
+        "description": "GET /health returning 200 when service is operational."
+      }
+    },
+    {
+      "event_id": "EVT-0002",
+      "request_id": "REQ-0001",
+      "actor": "governance-agent",
+      "role": "governor",
+      "phase": "governance",
+      "action": "reviewed",
+      "previous_state": "submitted",
+      "authority_scope": "governance",
+      "timestamp": "2026-05-20T10:05:00Z",
+      "payload": {
+        "decision": "approved",
+        "rationale": "Low-risk change, standard HTTP pattern.",
+        "constraints": ["must follow active naming policy"]
+      }
+    },
+    {
+      "event_id": "EVT-0003",
+      "request_id": "REQ-0001",
+      "actor": "validator-agent",
+      "role": "validator",
+      "phase": "validation",
+      "action": "validated",
+      "previous_state": "reviewed",
+      "authority_scope": "validation",
+      "timestamp": "2026-05-20T10:06:00Z",
+      "payload": {
+        "checks": [
+          { "rule": "policy_compliance", "status": "pass" },
+          { "rule": "scope_defined", "status": "pass" },
+          { "rule": "no_resource_conflicts", "status": "pass" }
+        ],
+        "result": "valid"
+      }
+    },
+    {
+      "event_id": "EVT-0004",
+      "request_id": "REQ-0001",
+      "actor": "executor-agent",
+      "role": "executor",
+      "phase": "execution",
+      "action": "executed",
+      "previous_state": "validated",
+      "authority_scope": "execution",
+      "timestamp": "2026-05-20T10:10:00Z",
+      "payload": {
+        "result": "success",
+        "output": {
+          "file": "src/handlers/health.js",
+          "endpoint": "GET /health",
+          "status_code": 200
+        }
       }
     }
   ]
